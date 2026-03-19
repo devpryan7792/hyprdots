@@ -2,7 +2,7 @@
 
 * {
     font-family: "JetBrains Mono Nerd Font";
-    font-size: 13px;
+    font-size: 12px;
     border: none;
     border-radius: 0;
     min-height: 0;
@@ -13,58 +13,69 @@ window#waybar {
     color: @onSurface;
 }
 
-/* ── Pills ─────────────────────────────────────────────────── */
-.modules-left > widget > #workspaces,
-.modules-left > widget > box,
-.modules-right > widget > box,
-.modules-center > widget > #custom-media,
-.modules-center > widget > #tray {
-    background: @background;
-    border-radius: 12px;
-    padding: 4px 10px;
-    margin: 4px 4px;
+/* ── Every module its own pill ──────────────────────────────── */
+#workspaces,
+#clock,
+#custom-updates,
+#custom-bluelight,
+#idle_inhibitor,
+#custom-media,
+#tray,
+#pulseaudio,
+#pulseaudio-microphone,
+#backlight,
+#network,
+#bluetooth,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#battery,
+#custom-notification,
+#custom-tray-toggle,
+#custom-power {
+    background: alpha(@surface, 0.85);
+    border-radius: 10px;
+    border: 1px solid alpha(@outline, 0.2);
+    margin: 4px 0px;
+    padding: 2px 7px;
+    color: @onSurface;
 }
 
 /* ── Workspaces ─────────────────────────────────────────────── */
 #workspaces {
-    background: @background;
-    border-radius: 12px;
-    padding: 4px 6px;
-    margin: 4px 4px;
+    padding: 0 1px;
 }
 
 #workspaces button {
     color: @onSurfaceVariant;
-    background: transparent;
-    padding: 2px 6px;
+    background: alpha(@surfaceVariant, 0.6);
+    padding: 2px 3px;
     border-radius: 8px;
-    min-width: 20px;
+    min-width: 14px;
+    font-size: 13px;
+    margin: 1px 0px;
 }
 
 #workspaces button.active {
     color: @primary;
-    background: @surfaceVariant;
+    background: alpha(@primary, 0.25);
 }
 
 #workspaces button.urgent {
     color: @error;
+    background: alpha(@error, 0.2);
 }
 
 #workspaces button:hover {
-    background: @surfaceVariant;
-    color: @onSurface;
+    background: alpha(@onSurface, 0.15);
 }
 
 /* ── Clock ──────────────────────────────────────────────────── */
-#clock {
-    color: @primary;
-    font-weight: bold;
-}
+#clock { color: @primary; font-weight: bold; }
 
 /* ── Updates ────────────────────────────────────────────────── */
-#custom-updates {
-    color: @tertiary;
-}
+#custom-updates { color: @tertiary; }
 
 /* ── Bluelight ──────────────────────────────────────────────── */
 #custom-bluelight.off   { color: @onSurfaceVariant; }
@@ -72,57 +83,46 @@ window#waybar {
 #custom-bluelight.mild  { color: #ffd580; }
 #custom-bluelight.night { color: #ff7043; }
 
+/* ── Idle ───────────────────────────────────────────────────── */
+#idle_inhibitor           { color: @onSurfaceVariant; }
+#idle_inhibitor.activated { color: @primary; }
+
 /* ── Media ──────────────────────────────────────────────────── */
-#custom-media {
-    color: @secondary;
-}
+#custom-media { color: @secondary; }
 
 /* ── Tray ───────────────────────────────────────────────────── */
-#tray {
-    color: @onSurface;
+#tray > .passive {
+    -gtk-icon-effect: dim;
+    opacity: 0;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
 }
-
-#tray > .passive { -gtk-icon-effect: dim; }
 #tray > .needs-attention { -gtk-icon-effect: highlight; }
 
 /* ── Audio ──────────────────────────────────────────────────── */
-#pulseaudio { color: @onSurface; }
-#pulseaudio.muted { color: @error; }
-#pulseaudio.microphone { color: @onSurfaceVariant; }
-#backlight { color: @tertiary; }
+#pulseaudio.muted      { color: @error; }
+#pulseaudio-microphone { color: @onSurfaceVariant; }
+#backlight             { color: @tertiary; }
 
 /* ── Network ────────────────────────────────────────────────── */
-#network { color: @onSurface; }
 #network.disconnected { color: @error; }
-#bluetooth { color: @primary; }
-#bluetooth.disabled { color: @onSurfaceVariant; }
+#bluetooth            { color: @primary; }
+#bluetooth.disabled   { color: @onSurfaceVariant; }
 
 /* ── System ─────────────────────────────────────────────────── */
-#cpu { color: @onSurface; }
-#cpu.warning { color: #ffb347; }
-#cpu.critical { color: @error; }
-#memory { color: @onSurface; }
-#memory.warning { color: #ffb347; }
-#memory.critical { color: @error; }
-#disk { color: @onSurface; }
-#temperature { color: @onSurface; }
+#cpu.warning          { color: #ffb347; }
+#cpu.critical         { color: @error; }
+#memory.warning       { color: #ffb347; }
+#memory.critical      { color: @error; }
 #temperature.critical { color: @error; }
 
 /* ── Battery ────────────────────────────────────────────────── */
-#battery { color: @onSurface; }
-#battery.charging { color: @tertiary; }
-#battery.warning:not(.charging) { color: #ffb347; }
+#battery.charging                { color: @tertiary; }
+#battery.plugged                 { color: @tertiary; }
+#battery.warning:not(.charging)  { color: #ffb347; }
 #battery.critical:not(.charging) { color: @error; }
 
-/* ── Notification ───────────────────────────────────────────── */
-#custom-notification { color: @onSurface; }
-
 /* ── Power ──────────────────────────────────────────────────── */
-#custom-power {
-    color: @error;
-    padding-right: 14px;
-}
-
-/* ── Idle inhibitor ─────────────────────────────────────────── */
-#idle_inhibitor { color: @onSurfaceVariant; }
-#idle_inhibitor.activated { color: @primary; }
+#custom-power { color: @error; }

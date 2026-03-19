@@ -5,43 +5,33 @@
     "margin-top": 8,
     "margin-left": 10,
     "margin-right": 10,
-    "spacing": 6,
+    "spacing": 4,
 
     "modules-left": [
         "hyprland/workspaces",
-        "group/info"
+        "clock",
+        "custom/updates",
+        "custom/bluelight",
+        "idle_inhibitor"
     ],
     "modules-center": [
-        "custom/media",
         "tray"
     ],
     "modules-right": [
-        "group/audio",
-        "group/connectivity",
-        "group/system",
-        "group/status"
+        "pulseaudio",
+        "pulseaudio#microphone",
+        "backlight",
+        "network",
+        "bluetooth",
+        "cpu",
+        "memory",
+        "disk",
+        "temperature",
+        "battery",
+        "custom/notification",
+        "custom/tray-toggle",
+        "custom/power"
     ],
-
-    "group/info": {
-        "orientation": "horizontal",
-        "modules": ["clock", "custom/updates", "custom/bluelight", "idle_inhibitor"]
-    },
-    "group/audio": {
-        "orientation": "horizontal",
-        "modules": ["pulseaudio", "pulseaudio#microphone", "backlight"]
-    },
-    "group/connectivity": {
-        "orientation": "horizontal",
-        "modules": ["network", "bluetooth"]
-    },
-    "group/system": {
-        "orientation": "horizontal",
-        "modules": ["cpu", "memory", "disk", "temperature"]
-    },
-    "group/status": {
-        "orientation": "horizontal",
-        "modules": ["battery", "custom/notification", "custom/power"]
-    },
 
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -54,8 +44,6 @@
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
         "on-click": "activate",
-        "smooth-scrolling-threshold": 5,
-        "disable-scroll": false,
         "sort-by-number": true
     },
 
@@ -63,8 +51,7 @@
         "interval": 1,
         "format": "󰥔  {:%H:%M}",
         "format-alt": "󰸗  {:%a %d %b}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "on-click": "toggle-format"
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
 
     "custom/updates": {
@@ -90,14 +77,7 @@
         "format-icons": {
             "activated": "󰅶",
             "deactivated": "󰾪"
-        },
-        "tooltip-format-activated": "Sleep inhibited",
-        "tooltip-format-deactivated": "Sleep allowed"
-    },
-
-    "tray": {
-        "icon-size": 14,
-        "spacing": 6
+        }
     },
 
     "custom/media": {
@@ -144,8 +124,7 @@
         "format": "{icon}  {percent}%",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
         "on-scroll-up": "brightnessctl set 5%+",
-        "on-scroll-down": "brightnessctl set 5%-",
-        "tooltip-format": "Brightness: {percent}%"
+        "on-scroll-down": "brightnessctl set 5%-"
     },
 
     "network": {
@@ -154,27 +133,21 @@
         "format-ethernet": "󰈀  {ifname}",
         "format-disconnected": "󰤭",
         "tooltip-format-wifi": "󰖩  {essid}  ({signalStrength}%)\n󰩟  {ipaddr}/{cidr}",
-        "tooltip-format-ethernet": "󰈀  {ifname}\n󰩟  {ipaddr}/{cidr}",
-        "tooltip-format-disconnected": "No connection",
-        "max-length": 22,
-        "on-click": "nm-connection-editor",
-        "on-click-right": "nm-connection-editor"
+        "max-length": 15,
+        "on-click": "nm-connection-editor"
     },
 
     "bluetooth": {
         "format": "󰂯",
         "format-disabled": "󰂲",
         "format-connected": "󰂱  {device_alias}",
-        "tooltip-format-connected": "{device_enumerate}",
-        "tooltip-format-enumerate-connected": "  {device_alias}",
         "on-click": "blueman-manager",
-        "max-length": 16
+        "max-length": 14
     },
 
     "cpu": {
         "interval": 30,
         "format": "󰻠  {usage}%",
-        "tooltip-format": "CPU: {usage}%  ·  Load: {load}",
         "on-click": "ghostty -e btop",
         "states": { "warning": 70, "critical": 90 }
     },
@@ -190,14 +163,12 @@
     "disk": {
         "interval": 30,
         "format": "󰋊  {percentage_used}%",
-        "tooltip-format": "Disk: {used} / {total}  ({percentage_used}%)",
         "path": "/"
     },
 
     "temperature": {
         "interval": 30,
         "format": "󰔐  {temperatureC}°C",
-        "tooltip-format": "Temp: {temperatureC}°C",
         "critical-threshold": 80,
         "format-critical": "󰸁  {temperatureC}°C"
     },
@@ -208,7 +179,6 @@
         "format-charging": "󰂄  {capacity}%",
         "format-plugged": "󰚥  {capacity}%",
         "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-        "tooltip-format": "Battery: {capacity}%  ·  {timeTo}",
         "states": { "warning": 30, "critical": 15 }
     },
 
@@ -227,6 +197,17 @@
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw",
         "escape": true
+    },
+
+    "custom/tray-toggle": {
+        "format": "󰄝",
+        "tooltip": false,
+        "on-click": "~/.config/waybar/scripts/tray-toggle.sh"
+    },
+
+    "tray": {
+        "icon-size": 14,
+        "spacing": 6
     },
 
     "custom/power": {

@@ -1,20 +1,16 @@
-@define-color bg0 #1e1e2e;
-@define-color bg1 #21252b;
-@define-color bg2 #2c313a;
-@define-color bg3 #3e4451;
-@define-color bg4 #4b5263;
-@define-color red #f38ba8;
-@define-color orange #d19a66;
-@define-color yellow #e5c07b;
-@define-color green #98c379;
-@define-color aqua #56b6c2;
-@define-color blue #61afef;
-@define-color purple #c678dd;
-@define-color fg #cdd6f4;
-@define-color grey0 #5c6370;
-@define-color grey1 #828997;
-@define-color grey2 #abb2bf;
-@define-color main-bg #111318;
-@define-color main-fg #e2e2e9;
-@define-color accent #adc7ff;
-{
+/* Fallback colors — overwritten by matugen */
+@define-color primary          #adc7ff;
+@define-color onPrimary        #002e6a;
+@define-color primaryContainer #004397;
+@define-color secondary        #bec6dc;
+@define-color tertiary         #dbbde1;
+@define-color background       #111318;
+@define-color surface          #1b1f27;
+@define-color surfaceVariant   #43474e;
+@define-color onSurface        #e2e2e9;
+@define-color onSurfaceVariant #c3c6cf;
+@define-color error            #ffb4ab;
+@define-color outline          #8d9199;
+@define-color main-bg          #111318;
+@define-color main-fg          #e2e2e9;
+@define-color accent           #adc7ff;
