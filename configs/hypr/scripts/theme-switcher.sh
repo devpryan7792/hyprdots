@@ -14,8 +14,8 @@ else
         | while read -r f; do echo "$f"; done \
         | rofi -dmenu -i \
                -p "  Wallpaper" \
-               -theme ~/.config/rofi/launchers/type-2/style.rasi \
-               -theme-str 'window {width: 700px;}')
+                \
+               
 fi
 
 [[ -z "$WALL" ]] && exit 0
