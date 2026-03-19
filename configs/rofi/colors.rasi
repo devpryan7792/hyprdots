@@ -1,0 +1,11 @@
+* {
+    primary:        #adc7ff;
+    on-primary:     #002e6a;
+    background:     #111318;
+    background-alt: #272c33;
+    foreground:     #e2e2e9;
+    selected:       #004397;
+    selected-text:  #ffffff;
+    urgent:         #ffb4ab;
+    border-color:   #8d9199;
+}

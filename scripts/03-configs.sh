@@ -49,11 +49,19 @@ deploy "$CONFIG_SRC/hypr/hypridle.conf"   "$CONFIG_DST/hypr/hypridle.conf"
 deploy "$CONFIG_SRC/hypr/hyprlock.conf"   "$CONFIG_DST/hypr/hyprlock.conf"
 deploy "$CONFIG_SRC/hypr/monitors.conf"   "$CONFIG_DST/hypr/monitors.conf"
 deploy "$CONFIG_SRC/hypr/workspaces.conf" "$CONFIG_DST/hypr/workspaces.conf"
+deploy "$CONFIG_SRC/hypr/rules.conf"     "$CONFIG_DST/hypr/rules.conf"
+ deploy "$CONFIG_SRC/hypr/colors.conf"     "$CONFIG_DST/hypr/colors.conf"
 deploy "$CONFIG_SRC/hypr/env.conf"        "$CONFIG_DST/hypr/env.conf"  # written by gpu script
 deploy "$CONFIG_SRC/hypr/scripts"         "$CONFIG_DST/hypr/scripts"
 sed_user "$CONFIG_DST/hypr/hyprlock.conf"
 sed_user "$CONFIG_DST/hypr/hypridle.conf"
 chmod +x "$CONFIG_DST/hypr/scripts/"* 2>/dev/null || true
+# Create placeholder files so hyprland doesn't error on first boot
+touch "$CONFIG_DST/hypr/rules.conf"
+touch "$CONFIG_DST/hypr/colors.conf"
+touch "$CONFIG_DST/hypr/workspaces.conf"
+touch "$CONFIG_DST/hypr/monitors.conf"
+touch "$CONFIG_DST/hypr/env.conf"
 
 # ── Waybar ────────────────────────────────────────────────────
 log_info "Deploying Waybar configs..."
