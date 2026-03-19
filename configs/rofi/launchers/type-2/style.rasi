@@ -1,0 +1,59 @@
+@import "~/.config/rofi/colors.rasi"
+
+* {
+    font: "JetBrains Mono Nerd Font 11";
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+window {
+    width: 600px;
+    background-color: @background;
+    border: 2px solid;
+    border-color: @border-color;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+mainbox {
+    spacing: 10px;
+}
+
+inputbar {
+    background-color: @background-alt;
+    border-radius: 8px;
+    padding: 10px 14px;
+    spacing: 10px;
+    children: [prompt, entry];
+}
+
+prompt {
+    text-color: @primary;
+}
+
+entry {
+    placeholder: "Search...";
+    placeholder-color: @border-color;
+}
+
+listview {
+    lines: 8;
+    scrollbar: false;
+    spacing: 4px;
+}
+
+element {
+    padding: 10px 14px;
+    border-radius: 8px;
+    spacing: 10px;
+    children: [element-icon, element-text];
+}
+
+element selected {
+    background-color: @selected;
+    text-color: @selected-text;
+}
+
+element-icon {
+    size: 24px;
+}
