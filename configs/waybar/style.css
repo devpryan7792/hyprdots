@@ -1,173 +1,128 @@
-        "format":       "{icon}  {temperatureC}°",
-        "format-icons": ["󱃃", "󰔏", "󱃂"],
-        "tooltip-format":     "Temp: {temperatureC}°C",
-        "critical-threshold": 80,
-        "interval": 5
-    },
-    // ── Battery  (inside status group) ─────────────────────────────
-    "battery": {
-        "interval": 10,
-        "format":          "{icon}  {capacity}%",
-        "format-charging": "󰂄  {capacity}%",
-        "format-plugged":  "󱘖  {capacity}%",
-        "format-full":     "󱟢  Full",
-        "format-icons":    ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-        "tooltip-format":  "{capacity}%  ·  {timeTo}",
-        "states": {
-            "warning":  30,
-            "critical": 15
-        }
-    },
-    // ── Notifications / SwayNC  (inside status group) ──────────────
-    "custom/notification": {
-        "format": "{icon}",
-        "format-icons": {
-            "notification":           "󱅫",
-            "none":                   "󰂜",
-            "dnd-notification":       "󰂠",
-            "dnd-none":               "󰪓",
-            "inhibited-notification": "󱅫",
-            "inhibited-none":         "󰂜"
-        },
-        "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click":       "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
-        "escape": true,
-        "tooltip": false
-    },
-    // ── Power  (inside status group) ───────────────────────────────
-    "custom/power": {
-        "format":  "󰐥",
-        "tooltip": false,
-        "on-click": "wlogout"
-    }
-}
 @import "colors.css";
+
 * {
+    font-family: "JetBrains Mono Nerd Font";
+    font-size: 13px;
     border: none;
     border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font", sans-serif;
-    font-weight: 600;
-    font-size: 11px;
     min-height: 0;
-    padding: 0;
-    margin: 0;
 }
+
 window#waybar {
     background: transparent;
+    color: @onSurface;
 }
-tooltip {
-    background: alpha(@main-bg, 0.95);
-    border: 1px solid @accent;
-    border-radius: 8px;
-    padding: 4px;
+
+/* ── Pills ─────────────────────────────────────────────────── */
+.modules-left > widget > #workspaces,
+.modules-left > widget > box,
+.modules-right > widget > box,
+.modules-center > widget > #custom-media,
+.modules-center > widget > #tray {
+    background: @background;
+    border-radius: 12px;
+    padding: 4px 10px;
+    margin: 4px 4px;
 }
-tooltip label {
-    color: @main-fg;
-    padding: 2px;
-}
+
+/* ── Workspaces ─────────────────────────────────────────────── */
 #workspaces {
-    background: @main-bg;
-    padding: 0 2px;
-    margin: 0 6px 0 0;
-    border-radius: 14px;
-    border: 1px solid alpha(@accent, 0.4);
+    background: @background;
+    border-radius: 12px;
+    padding: 4px 6px;
+    margin: 4px 4px;
 }
+
 #workspaces button {
+    color: @onSurfaceVariant;
     background: transparent;
-    color: @main-fg;
-    padding: 0 5px;
-    margin: 0;
+    padding: 2px 6px;
     border-radius: 8px;
-    transition: all 0.2s;
-    min-width: 14px;
-}
-#workspaces button.active {
-    background: @accent;
-    color: @main-bg;
-    font-weight: 700;
-}
-#workspaces button:hover {
-    background: alpha(@accent, 0.2);
-}
-#clock {
-    background: @main-bg;
-    color: @accent;
-    padding: 2px 8px;
-    margin: 0 6px 0 0;
-    border-radius: 14px;
-    border: 1px solid alpha(@accent, 0.4);
-    font-weight: 700;
-}
-#tray {
-    background: @main-bg;
-    padding: 0 6px;
-    border-radius: 14px;
-    border: 1px solid alpha(@accent, 0.4);
-}
-#custom-updates, #idle_inhibitor, #pulseaudio, #backlight, #network, #bluetooth, #cpu, #memory, #disk, #temperature, #battery, #custom-notification, #custom-power {
-    background: @main-bg;
-    padding: 2px 5px;
-    margin: 0 3px 0 0;
-    border-radius: 14px;
-    border: 1px solid alpha(@accent, 0.4);
-    transition: all 0.2s;
     min-width: 20px;
 }
+
+#workspaces button.active {
+    color: @primary;
+    background: @surfaceVariant;
+}
+
+#workspaces button.urgent {
+    color: @error;
+}
+
+#workspaces button:hover {
+    background: @surfaceVariant;
+    color: @onSurface;
+}
+
+/* ── Clock ──────────────────────────────────────────────────── */
+#clock {
+    color: @primary;
+    font-weight: bold;
+}
+
+/* ── Updates ────────────────────────────────────────────────── */
+#custom-updates {
+    color: @tertiary;
+}
+
+/* ── Bluelight ──────────────────────────────────────────────── */
+#custom-bluelight.off   { color: @onSurfaceVariant; }
+#custom-bluelight.warm  { color: #ffb347; }
+#custom-bluelight.mild  { color: #ffd580; }
+#custom-bluelight.night { color: #ff7043; }
+
+/* ── Media ──────────────────────────────────────────────────── */
+#custom-media {
+    color: @secondary;
+}
+
+/* ── Tray ───────────────────────────────────────────────────── */
+#tray {
+    color: @onSurface;
+}
+
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }
+
+/* ── Audio ──────────────────────────────────────────────────── */
+#pulseaudio { color: @onSurface; }
+#pulseaudio.muted { color: @error; }
+#pulseaudio.microphone { color: @onSurfaceVariant; }
+#backlight { color: @tertiary; }
+
+/* ── Network ────────────────────────────────────────────────── */
+#network { color: @onSurface; }
+#network.disconnected { color: @error; }
+#bluetooth { color: @primary; }
+#bluetooth.disabled { color: @onSurfaceVariant; }
+
+/* ── System ─────────────────────────────────────────────────── */
+#cpu { color: @onSurface; }
+#cpu.warning { color: #ffb347; }
+#cpu.critical { color: @error; }
+#memory { color: @onSurface; }
+#memory.warning { color: #ffb347; }
+#memory.critical { color: @error; }
+#disk { color: @onSurface; }
+#temperature { color: @onSurface; }
+#temperature.critical { color: @error; }
+
+/* ── Battery ────────────────────────────────────────────────── */
+#battery { color: @onSurface; }
+#battery.charging { color: @tertiary; }
+#battery.warning:not(.charging) { color: #ffb347; }
+#battery.critical:not(.charging) { color: @error; }
+
+/* ── Notification ───────────────────────────────────────────── */
+#custom-notification { color: @onSurface; }
+
+/* ── Power ──────────────────────────────────────────────────── */
 #custom-power {
-    margin-right: 0;
+    color: @error;
+    padding-right: 14px;
 }
-#custom-updates:hover, #idle_inhibitor:hover, #pulseaudio:hover, #backlight:hover, #network:hover, #bluetooth:hover, #cpu:hover, #memory:hover, #disk:hover, #temperature:hover, #battery:hover, #custom-notification:hover, #custom-power:hover {
-    background: alpha(@accent, 0.15);
-}
-#custom-updates { color: #89b4fa; }
-#idle_inhibitor { color: @main-fg; }
-#idle_inhibitor.activated { color: @accent; }
-#pulseaudio { color: #a6e3a1; }
-#pulseaudio.muted { color: #f38ba8; }
-#backlight { color: #f9e2af; }
-#network { color: #cba6f7; }
-#bluetooth { color: #89dceb; }
-#cpu { color: #89dceb; }
-#memory { color: #fab387; }
-#disk { color: #94e2d5; }
-#temperature { color: #74c7ec; }
-#battery { color: #a6e3a1; }
-#battery.charging { color: #89dceb; }
-#battery.warning { color: #fab387; }
-#battery.critical { color: #f38ba8; }
-#custom-notification { color: @accent; }
-#custom-power { color: #f38ba8; }
-#custom-bluelight.off    { color: #888; }
-#custom-bluelight.warm   { color: #ffb347; }
-#custom-bluelight.mild   { color: #ffd580; }
-#custom-bluelight.night  { color: #ff6b35; }
-#!/bin/bash
-# 1. Check Interface (Hardware/Kernel)
-if ip link show | grep -q "wlan0"; then B1="●"; else B1="○"; fi
-# 2. Check iwd Service
-if systemctl is-active --quiet iwd; then B2="●"; else B2="○"; fi
-# 3. Check Local IP (DHCP)
-if ip addr show wlan0 | grep -q "inet "; then B3="●"; else B3="○"; fi
-# 4. Check External Ping (8.8.8.8)
-if ping -c 1 -W 1 8.8.8.8 > /dev/null 2>&1; then B4="●"; else B4="○"; fi
-# Output in a :: format
-echo "$B1$B2"
-echo "$B3$B4" | tr -d '\n'
-#!/usr/bin/env bash
-STATE_FILE="${XDG_RUNTIME_DIR:-/tmp}/bluelight_state"
-current=$(cat "$STATE_FILE" 2>/dev/null || echo "off")
-case "$current" in
-    off)   next="3500" ;;
-    3500)  next="4500" ;;
-    4500)  next="2700" ;;
-    2700)  next="off"  ;;
-    *)     next="off"  ;;
-esac
-echo "$next" > "$STATE_FILE"
-pkill -x hyprsunset 2>/dev/null
-[ "$next" != "off" ] && hyprsunset -t "$next" &
-pkill -RTMIN+8 waybar
-========================= CONFIG: $HOME/.config/rofi =========================
+
+/* ── Idle inhibitor ─────────────────────────────────────────── */
+#idle_inhibitor { color: @onSurfaceVariant; }
+#idle_inhibitor.activated { color: @primary; }
