@@ -1,11 +1,9 @@
 * {
-    primary:        #adc7ff;
-    on-primary:     #002e6a;
-    background:     #111318;
-    background-alt: #272c33;
-    foreground:     #e2e2e9;
-    selected:       #004397;
-    selected-text:  #ffffff;
-    urgent:         #ffb4ab;
-    border-color:   #8d9199;
+    ro-bg:     #2e3440;
+    ro-bg-alt: #3b4252;
+    ro-fg:     #eceff4;
+    ro-ac:     #88c0d0;
+    ro-se:     #434c5e;
+    ro-ur:     #bf616a;
+    ro-bo:     #4c566a;
 }
